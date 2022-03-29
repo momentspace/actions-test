@@ -12,13 +12,13 @@ jobs:
       with:
         ruby-version: 2.7.5
         bundler-cache: true
-    - run: |
-        gem install bundler
-        bundle config set path 'vendor/bundle'
-        bundle install --jobs 4 --retry 3
-    - uses: reviewdog/action-setup@v1
-      with:
-        reviewdog_version: latest
+        #    - run: |
+        #        gem install bundler
+        #        bundle config set path 'vendor/bundle'
+        #        bundle install --jobs 4 --retry 3
+        #    - uses: reviewdog/action-setup@v1
+        #      with:
+        #        reviewdog_version: latest
     - name: rubocop
       uses: reviewdog/action-rubocop@v2
       with:
