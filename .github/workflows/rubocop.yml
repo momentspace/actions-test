@@ -8,13 +8,14 @@ jobs:
         working-directory: ./backend
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.5
         bundler-cache: true
     - run: |
         gem install bundler
-        bundle install --jobs 4 --retry 3 --path vendor/bundle
+        bundle config set path 'vendor/bundle'
+        bundle install --jobs 4 --retry 3
     - uses: reviewdog/action-setup@v1
       with:
         reviewdog_version: latest
@@ -23,6 +24,7 @@ jobs:
       with:
         rubocop_version: gemfile
         rubocop_extensions: rubocop-rails:gemfile rubocop-performance:gemfile
-        reporter: github-pr-review 
+        level: warning
+        reporter: github-pr-review
         workdir: ./backend
 
