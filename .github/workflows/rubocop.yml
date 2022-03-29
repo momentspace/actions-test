@@ -24,6 +24,7 @@ jobs:
       with:
         rubocop_version: gemfile
         rubocop_extensions: rubocop-rails:gemfile rubocop-performance:gemfile
+        rubocop_flags: backend/
         level: warning
         reporter: github-pr-review
         workdir: ./backend
