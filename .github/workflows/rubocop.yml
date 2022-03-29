@@ -13,7 +13,7 @@ jobs:
         ruby-version: 2.7.5
         bundler-cache: true
         #    - run: |
-        #        gem install bundler
+        #       gem install bundler
         #        bundle config set path 'vendor/bundle'
         #        bundle install --jobs 4 --retry 3
         #    - uses: reviewdog/action-setup@v1
@@ -24,7 +24,6 @@ jobs:
       with:
         rubocop_version: gemfile
         rubocop_extensions: rubocop-rails:gemfile rubocop-performance:gemfile
-        rubocop_flags: backend/
         level: warning
         reporter: github-pr-review
         workdir: ./backend
