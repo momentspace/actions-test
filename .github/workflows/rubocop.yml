@@ -3,8 +3,6 @@ on: [pull_request]
 jobs:
   rubocop:
     runs-on: ubuntu-latest
-    defaults:
-      run:
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
