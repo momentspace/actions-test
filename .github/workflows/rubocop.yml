@@ -2,22 +2,35 @@ name: rubocop
 on: [pull_request]
 jobs:
   rubocop:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6.6
-    - run: |
-        gem install bundler
-        bundle install
-      working-directory: ./backend
-    - name: Setup reviewdog
-      run: |
-        mkdir -p $HOME/bin && curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b $HOME/bin
-        echo ::add-path::$HOME/nom
-    - name: Run rubocop with reviewdog
-      env:
-        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: bundle exec rubocop | reviewdog -reporter=github-pr-review -f=rubocop
-      working-directory: ./backend
+        ruby-version: 2.7.5
+        bundler-cache: true
+        #    - run: |
+        #       gem install bundler
+        #        bundle config set path 'vendor/bundle'
+        #        bundle install --jobs 4 --retry 3
+        #    - uses: reviewdog/action-setup@v1
+        #      with:
+        #        reviewdog_version: latest
+    - name: rubocop
+      # uses: reviewdog/action-rubocop@v2
+      # with:
+      #   rubocop_version: gemfile
+      #   rubocop_extensions: rubocop-rails:gemfile rubocop-performance:gemfile
+      #   fail_on_error: true
+      #   level: warning
+      #   reporter: github-pr-review
+      #   workdir: ./backend
+      uses: reviewdog/action-rubocop@v2
+      with:
+        rubocop_version: gemfile
+        rubocop_extensions: rubocop-rails:gemfile
+        reporter: github-pr-review
+        workdir: ./backend
