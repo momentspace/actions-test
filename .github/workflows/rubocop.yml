@@ -29,4 +29,4 @@ jobs:
       with:
         rubocop_version: gemfile
         rubocop_extensions: rubocop-rails:gemfile
-        # reporter: github-pr-review
+        reporter: github-pr-review
